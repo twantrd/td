@@ -7,7 +7,7 @@ List of links below for reference
 * [Ansible](https://www.ansible.com/)
 
 # Pre-requisites
-1. For the account running this, generate ssh keys and place the public key in the `aws_key_pair` resource
+1. For the account running this, generate ssh keys and place the public key in Terraform's `aws_key_pair` resource
 2. This assumes that you have an AWS account already and have used `aws configure` (AWS CLI) to set up your default access/secret keys like so:
 ```
 -bash-4.1$ aws configure
