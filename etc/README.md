@@ -24,7 +24,8 @@ Default output format [None]: json
 # Usage
 * terraform plan (to see what terraform will do)
 * terraform apply (to provision infrastructure)
-	* This will also locally execute ansible playbooks to provision Apache and Nginx listening on non-standard ports for illustration purposes
+	* This will also locally execute ansible playbooks to provision Apache and Nginx listening on non-standard ports for illustration purposes<p>
+![alt-text](terra_sshot.png?raw=true "screenshot")
 
 # Contributing
 Use the git-flow process: <br>
