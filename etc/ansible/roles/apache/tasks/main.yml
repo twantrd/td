@@ -1,0 +1,13 @@
+---
+- name: Installing apache2
+  become: true
+  apt:
+    name: apache2
+    state: present
+  register: apache2_installed
+
+- name: Ensure apache is enabled at boot
+  become: true
+  service:
+    name: apache2
+    enabled: yes

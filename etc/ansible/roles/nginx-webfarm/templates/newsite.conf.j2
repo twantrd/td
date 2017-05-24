@@ -1,0 +1,15 @@
+# {{ ansible_managed }}
+server {
+        listen {{ nginx_listen_port }};
+        listen [::]:{{ nginx_listen_port }};
+
+        root {{ nginx_docroot }};
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name {{ nginx_servername }};
+        access_log {{ access_logdir }}/access.log;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}

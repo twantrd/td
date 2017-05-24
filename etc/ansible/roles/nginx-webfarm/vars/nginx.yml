@@ -1,0 +1,5 @@
+nginx_listen_port: 8900
+nginx_servername: "td.com"
+access_logdir: "/var/log/tdcustom/accesslogs"
+newsite_name: "newsite"
+nginx_docroot: "/var/www/html/{{ newsite_name }}"

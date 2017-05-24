@@ -1,0 +1,51 @@
+- include_vars: nginx.yml
+
+- name: Creating dirs for nginx
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+  with_items:
+    - /var/www/html/newsite
+    - "{{ access_logdir }}"
+  tags:
+    - nginx
+
+- name: Templating out newsite config
+  become: true
+  template:
+    src: newsite.conf.j2
+    dest: /etc/nginx/sites-available/newsite.conf
+    owner: www-data
+    group: www-data
+    backup: yes
+  tags:
+    - nginx
+  notify:
+    - restart nginx
+
+- name: Templating out files for newsite to be active
+  become: true
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: www-data
+    group: www-data
+  with_items:
+    - { src: 'index.html.j2', dest: '/var/www/html/newsite/index.html' }
+    - { src: 'default.j2', dest: '/etc/nginx/sites-available/default' }
+  tags:
+    - nginx
+
+- name: Ensuring symlink for newsite config exists
+  become: true
+  file:
+    src: /etc/nginx/sites-available/newsite.conf
+    dest: /etc/nginx/sites-enabled/newsite.conf
+    state: link
+  tags:
+    - nginx
+  notify:
+    - restart nginx

@@ -1,0 +1,14 @@
+---
+- name: Installing common tools
+  become: true
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  with_items:
+    - strace
+    - wget
+    - curl
+    - sysstat
+  tags:
+    - common

@@ -1,0 +1,6 @@
+---
+apache_listen_port: 8900
+apache_servername: "td.com"
+access_logdir: "/var/log/tdcustom/accesslogs"
+newsite_name: "newsite"
+apache_docroot: "/var/www/html/{{ newsite_name }}"

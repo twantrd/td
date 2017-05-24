@@ -1,0 +1,10 @@
+---
+- name: restart apache2
+  become: true
+  service:
+    name: apache2
+    state: restarted
+
+- name: enable newsite
+  become: true
+  shell: /usr/sbin/a2ensite "{{ newsite_name }}" && /usr/bin/service apache2 restart

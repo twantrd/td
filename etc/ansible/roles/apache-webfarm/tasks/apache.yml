@@ -1,0 +1,57 @@
+- include_vars: apache.yml
+
+- name: Shutting down apache2, showing usage of reading from register
+  become: true
+  service: 
+    name: apache2
+    state: stopped
+  when: apache2_installed.changed
+
+- name: Creating/changing dirs for apache2
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: www-data
+    group: www-data
+  with_items:
+    - /var/www/html/newsite 
+    - "{{ access_logdir }}"
+  tags:
+    - apache2
+
+- name: Templating out ports.conf
+  become: true
+  template:
+    src: /etc/ansible/roles/apache/templates/ports.conf.j2
+    dest: /etc/apache2/ports.conf
+    owner: www-data
+    group: www-data
+    backup: yes
+  tags:
+    - apache2
+  notify:
+    - restart apache2
+
+- name: Templating out newsite configuration
+  become: true
+  template:
+    src: newsite.conf.j2
+    dest: /etc/apache2/sites-available/newsite.conf
+    owner: www-data
+    group: www-data
+    backup: yes
+  tags:
+    - apache2
+  notify:
+    - enable newsite
+
+- name: Templating out newsite html
+  become: true
+  template: 
+    src: index.html.j2
+    dest: /var/www/html/newsite/index.html
+    owner: www-data
+    group: www-data
+  tags:
+    - apache2

@@ -1,0 +1,16 @@
+---
+- name: Installing nginx
+  become: true
+  apt:
+    name: nginx
+    state: present
+  tags:
+    - nginx
+
+- name: Ensure nginx is enabled at boot
+  become: true
+  service:
+    name: nginx
+    enabled: yes
+  tags:
+    - nginx
