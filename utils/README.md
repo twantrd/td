@@ -13,6 +13,7 @@ Default output format [None]: json
 
 # Usage
 `gather_info.sh` - Display to stdout your ELB FQDN, ELB name, instance status, and public ip of your instances behind the LB. 
+<br>
 ![alt-text](util_sshot.png?raw=true "screenshot")
 
 # Contributing
