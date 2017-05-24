@@ -20,6 +20,8 @@ Default output format [None]: json
 # Setup
 * Copy `ansible` dir to `/etc/` 
 * Copy `terraform` dir to `/etc/`
+
+# Usage
 * terraform plan (to see what terraform will do)
 * terraform apply (to provision infrastructure)
 	* This will also locally execute ansible playbooks to provision Apache and Nginx listening on non-standard ports for illustration purposes
